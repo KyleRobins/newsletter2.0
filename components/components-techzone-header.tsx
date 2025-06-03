@@ -317,6 +317,19 @@ const CardWithForm = ({ t }) => {
   );
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Techzone",
+  url: "http://yourwebsite.com",
+  logo: "http://yourwebsite.com/logo.png",
+  sameAs: [
+    "http://www.facebook.com/yourprofile",
+    "http://www.twitter.com/yourprofile",
+    "http://www.instagram.com/yourprofile",
+  ],
+};
+
 const TechzoneHeader = () => {
   const [language, setLanguage] = useState("en-us");
   const t = translations[language];
@@ -329,92 +342,97 @@ const TechzoneHeader = () => {
   };
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col">
-      <Toaster position="bottom-right" expand={true} />
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex justify-between items-center">
-          <div className="text-2xl font-bold">Techzone</div>
-          <ul className="flex space-x-6">
-            <li>{t.about}</li>
-            <li>{t.blog}</li>
-            <li>{t.merch}</li>
-            <li>{t.events}</li>
-          </ul>
-          <div>
-            <Search className="w-6 h-6" />
+    <>
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+      <div className="bg-black text-white min-h-screen flex flex-col">
+        <Toaster position="bottom-right" expand={true} />
+        <header className="container mx-auto px-4 py-6">
+          <nav className="flex justify-between items-center">
+            <div className="text-2xl font-bold">Techzone</div>
+            <ul className="flex space-x-6">
+              <li>{t.about}</li>
+              <li>{t.blog}</li>
+              <li>{t.merch}</li>
+              <li>{t.events}</li>
+            </ul>
+            <div>
+              <Search className="w-6 h-6" />
+            </div>
+          </nav>
+        </header>
+
+        <main className="container mx-auto px-4 py-12 flex flex-col items-center flex-grow">
+          <div className="text-center mb-4">
+            <span className="bg-green-600 text-white px-2 py-1 rounded-full text-sm">
+              {t.webinar}
+            </span>
+            <span className="ml-2 text-gray-400">23 OCT</span>
+            <span className="ml-2">{t.migrating}</span>
           </div>
-        </nav>
-      </header>
-
-      <main className="container mx-auto px-4 py-12 flex flex-col items-center flex-grow">
-        <div className="text-center mb-4">
-          <span className="bg-green-600 text-white px-2 py-1 rounded-full text-sm">
-            {t.webinar}
-          </span>
-          <span className="ml-2 text-gray-400">23 OCT</span>
-          <span className="ml-2">{t.migrating}</span>
-        </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-center">
-          For developers,{" "}
-          <span className="text-emerald-400">DevOps engineers</span>,
-          <span className="text-emerald-400">Web3 engineers</span>, and{" "}
-          cybersecurity enthusiasts.
-        </h1>
-        <p className="text-xl text-gray-400 max-w-2xl text-center mb-8">
-          {t.heroDescription}
-        </p>
-        <div className="flex space-x-4">
-          <Button
-            variant="outline"
-            onClick={scrollToForm}
-            className="border-[hsl(154.9deg,100%,19.2%)] text-[hsl(154.9deg,100%,19.2%)] bg-[hsl(154.9deg,100%,19.2%)] hover:bg-[hsl(154.9deg,100%,19.2%)] text-white"
-          >
-            {t.subscribe}
-          </Button>
-          <Button
-            variant="outline"
-            className="border-[hsl(0deg,0%,14.1%)] text-[hsl(0deg,0%,14.1%)] bg-[hsl(0deg,0%,14.1%)] hover:bg-[hsl(0deg,0%,14.1%)] text-white"
-          >
-            {t.learnMore}
-          </Button>
-        </div>
-        <LogoSlider />
-      </main>
-
-      <footer className="bg-gray-900 py-12 px-4">
-        <div className="max-w-6xl mx-auto flex justify-center">
-          <CardWithForm t={t} />
-        </div>
-      </footer>
-
-      <div className="bg-black py-4 px-6">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <Select value={language} onValueChange={setLanguage}>
-              <SelectTrigger className="bg-gray-800 text-white border-none">
-                <SelectValue placeholder="English (US)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en-us">English (US)</SelectItem>
-                <SelectItem value="es">Español</SelectItem>
-                <SelectItem value="fr">Français</SelectItem>
-                <SelectItem value="de">Deutsch</SelectItem>
-              </SelectContent>
-            </Select>
-            <span className="text-gray-500">{t.copyright}</span>
-          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-center">
+            For developers,{" "}
+            <span className="text-emerald-400">DevOps engineers</span>,
+            <span className="text-emerald-400">Web3 engineers</span>, and{" "}
+            cybersecurity enthusiasts.
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl text-center mb-8">
+            {t.heroDescription}
+          </p>
           <div className="flex space-x-4">
-            <Twitter className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <Youtube className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <Linkedin className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <Github className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <Instagram className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <Music2 className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
-            <MessageCircle className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+            <Button
+              variant="outline"
+              onClick={scrollToForm}
+              className="border-[hsl(154.9deg,100%,19.2%)] text-[hsl(154.9deg,100%,19.2%)] bg-[hsl(154.9deg,100%,19.2%)] hover:bg-[hsl(154.9deg,100%,19.2%)] text-white"
+            >
+              {t.subscribe}
+            </Button>
+            <Button
+              variant="outline"
+              className="border-[hsl(0deg,0%,14.1%)] text-[hsl(0deg,0%,14.1%)] bg-[hsl(0deg,0%,14.1%)] hover:bg-[hsl(0deg,0%,14.1%)] text-white"
+            >
+              {t.learnMore}
+            </Button>
+          </div>
+          <LogoSlider />
+        </main>
+
+        <footer className="bg-gray-900 py-12 px-4">
+          <div className="max-w-6xl mx-auto flex justify-center">
+            <CardWithForm t={t} />
+          </div>
+        </footer>
+
+        <div className="bg-black py-4 px-6">
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="bg-gray-800 text-white border-none">
+                  <SelectValue placeholder="English (US)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en-us">English (US)</SelectItem>
+                  <SelectItem value="es">Español</SelectItem>
+                  <SelectItem value="fr">Français</SelectItem>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                </SelectContent>
+              </Select>
+              <span className="text-gray-500">{t.copyright}</span>
+            </div>
+            <div className="flex space-x-4">
+              <Twitter className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <Youtube className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <Linkedin className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <Github className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <Instagram className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <Music2 className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+              <MessageCircle className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
