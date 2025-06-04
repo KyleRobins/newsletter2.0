@@ -1,6 +1,7 @@
 {
   "name": "newsletter2.0",
   "version": "0.1.0",
+   "description": "triggering vercel deploy",
   "private": true,
   "scripts": {
     "dev": "next dev",
